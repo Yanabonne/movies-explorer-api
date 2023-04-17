@@ -7,10 +7,10 @@ const { errors } = require('celebrate');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, NODE_ENV, DB_ADDRESS } = process.env;
 const app = express();
 
-mongoose.connect('mongodb://0.0.0.0:27017/bitfilmsdb', {
+mongoose.connect(NODE_ENV === 'production' ? DB_ADDRESS : 'mongodb://0.0.0.0:27017/bitfilmsdb', {
   useNewUrlParser: true,
 });
 
