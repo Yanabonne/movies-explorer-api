@@ -15,7 +15,10 @@ function sendError(err, next) {
 module.exports.getMovies = (req, res, next) => {
   Movie.find({})
     .populate(['owner'])
-    .then((movies) => res.send({ data: movies }))
+    .then((result) => {
+      const movies = result.filter((item) => item.owner._id.toHexString() === req.user._id);
+      res.send({ data: movies });
+    })
     .catch((err) => sendError(err, next));
 };
 
