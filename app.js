@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
-// const cors = require('cors');
+const cors = require('cors');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -14,7 +14,7 @@ mongoose.connect(NODE_ENV === 'production' ? DB_ADDRESS : 'mongodb://0.0.0.0:270
   useNewUrlParser: true,
 });
 
-// app.use(cors({ origin: ['https://yanabonne.nomoredomains.monster'] }));
+app.use(cors({ origin: ['https://yanabonnemovies.nomoredomains.monster'] }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
